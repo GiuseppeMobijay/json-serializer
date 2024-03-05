@@ -1,56 +1,20 @@
-<?php
+The class must be `implements \JsonSerializable`
 
+Then you have to `use JsonSerializeByAttribute` after class declaration;
 
-use Carbon\Carbon;
-use Mobijay\JsonSerializer\Attributes\JsonSerialize;
-use Mobijay\JsonSerializer\JsonSerializeByAttribute;
-use PHPUnit\Framework\TestCase;
+for each field or method you want to serialize add the following attribute
+`#[JsonSerialize]
+the field name is used as key in the serialized json.
 
-;
+If you want to change the key in the json you have to add it
+#[JsonSerialize('customPrivateField')]
 
-class JsonSerializeByAnnotationTest extends TestCase
+A complete example:
+
+`
+```class JsonTestOne implements \JsonSerializable
 {
-//    use RefreshDatabase;
-
-    protected function setUp(): void
-    {
-        //PARENT SETUP STA' SEMPRE ALL'INIZIO
-        parent::setUp();
-        //AGGIUNGI CODICE QUI
-    }
-
-    protected function tearDown(): void
-    {
-//        echo "teardown\n";
-        parent::tearDown();
-    }
-
-
-    public function testOne()
-    {
-        $json = json_encode(new JsonTestOne());
-        //occhio alla formattazione, deve essere senza spazi
-        $json_expected = '{"customPrivateField":"privateFieldValue",
-"publicField":"publicFieldValue",
-"carbonField":"2023-10-23T11:33:32.000000Z",
-"unSetArrayField":null,
-"arrayField":["test1","test2"],
-"associativeArrayField":{"testKey1":"testValue1","testKey2":"testValue2"},
-"jsonTestOneNested2":{"nestedCustomPrivateField":"nestedPrivateFieldValue"},
-"objectWithoutSerializable":{"publicFieldWithoutSerializable":"publicFieldWithoutSerializableValue"},
-"customPublicMethod":"publicMethodValue",
-"privateMethod":"privateMethodValue"}';
-        $json_expected = str_replace(["\n", "\t"], ["", ""], $json_expected);
-        $this->assertEquals($json_expected, $json);
-    }
-
-
-}
-
-
-class JsonTestOne implements \JsonSerializable
-{
-    use JsonSerializeByAttribute;
+use JsonSerializeByAttribute;
 
     #[JsonSerialize('customPrivateField')]
     private $privateField;
@@ -58,7 +22,7 @@ class JsonTestOne implements \JsonSerializable
     public $disturbanceField1;
     private $disturbanceField2;
 
-    #[JsonSerialize]
+    #[JsonSerialize] 
     public $publicField;
 
     #[JsonSerialize] public Carbon $carbonField;
@@ -108,7 +72,7 @@ class JsonTestOne implements \JsonSerializable
 
 class JsonTestOneNested implements \JsonSerializable
 {
-    use JsonSerializeByAttribute;
+use JsonSerializeByAttribute;
 
     #[JsonSerialize('nestedCustomPrivateField')]
     private $privateField = "nestedPrivateFieldValue";
@@ -117,8 +81,10 @@ class JsonTestOneNested implements \JsonSerializable
 
 class JsonTestOneNestedWithoutJsonSerializable
 {
-    private $privateField = "nestedPrivateFieldValueWithout";
-    public $publicFieldWithoutSerializable = "publicFieldWithoutSerializableValue";
-}
+private $privateField = "nestedPrivateFieldValueWithout";
+public $publicFieldWithoutSerializable = "publicFieldWithoutSerializableValue";
+}```
+
+
 
 
