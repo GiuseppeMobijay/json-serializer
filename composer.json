@@ -1,0 +1,24 @@
+{
+    "name": "mobijay/json-serializer",
+    "description": "Serialize php object using attribute definitions",
+    "type": "library",
+    "version": "0.1.0",
+    "autoload": {
+        "psr-4": {
+            "Mobijay\\JsonSerializer\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Giuseppe Morreale"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "illuminate/collections": "^v10.46.0",
+        "nesbot/carbon": "^3.0.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.1"
+    }
+}
