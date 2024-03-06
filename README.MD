@@ -1,4 +1,4 @@
-The class must be `implements \JsonSerializable`
+The class you wants to serialize must `implements \JsonSerializable`
 
 Then you have to `use JsonSerializeByAttribute` Trait. It contains the serialization method;
 
@@ -9,6 +9,11 @@ the field name is used as key in the serialized json.
 If you want to change the key in the json you have to add it
 #[JsonSerialize('customPrivateField')]
 
+If null value shouldn't serialized you have to specify it
+#[JsonSerialize('customPrivateField',false)]
+by default it is true
+
+
 A complete example:
 
 `
@@ -16,6 +21,11 @@ A complete example:
 {
 use JsonSerializeByAttribute;
 
+    #[JsonSerialize('nullField1',false)]
+    private ?string $nullField1;
+    #[JsonSerialize('nullField2',true)]
+    private ?string $nullField2 = null;
+    
     #[JsonSerialize('customPrivateField')]
     private $privateField;
 
