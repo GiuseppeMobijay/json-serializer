@@ -32,7 +32,7 @@ trait JsonSerializeByAttribute
                 if (isset($ret[$jsonKey]) || $this->showNull($jsonSerializeAttribute))
                     return $ret;
                 else
-                    return null;
+                    return [];
             });
 
 
