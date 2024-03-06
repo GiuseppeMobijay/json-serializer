@@ -6,25 +6,8 @@ use Mobijay\JsonSerializer\Attributes\JsonSerialize;
 use Mobijay\JsonSerializer\JsonSerializeByAttribute;
 use PHPUnit\Framework\TestCase;
 
-;
-
 class JsonSerializeByAnnotationTest extends TestCase
 {
-//    use RefreshDatabase;
-
-    protected function setUp(): void
-    {
-        //PARENT SETUP STA' SEMPRE ALL'INIZIO
-        parent::setUp();
-        //AGGIUNGI CODICE QUI
-    }
-
-    protected function tearDown(): void
-    {
-//        echo "teardown\n";
-        parent::tearDown();
-    }
-
 
     public function testOne()
     {
@@ -47,15 +30,14 @@ class JsonSerializeByAnnotationTest extends TestCase
 
 }
 
-
-class JsonTestOne implements \JsonSerializable
+class JsonTestOne implements JsonSerializable
 {
     use JsonSerializeByAttribute;
 
     #[JsonSerialize('nullField1',false)]
-    private $nullField1;
+    private ?string $nullField1;
     #[JsonSerialize('nullField2',true)]
-    private $nullField2 = null;
+    private ?string $nullField2 = null;
     #[JsonSerialize('customPrivateField')]
     private $privateField;
 
