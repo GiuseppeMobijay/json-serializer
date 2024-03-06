@@ -30,7 +30,7 @@ class JsonSerializeByAnnotationTest extends TestCase
     {
         $json = json_encode(new JsonTestOne());
         //occhio alla formattazione, deve essere senza spazi
-        $json_expected = '{"customPrivateField":"privateFieldValue",
+        $json_expected = '{"nullField2":null,"customPrivateField":"privateFieldValue",
 "publicField":"publicFieldValue",
 "carbonField":"2023-10-23T11:33:32.000000Z",
 "unSetArrayField":null,
@@ -52,6 +52,10 @@ class JsonTestOne implements \JsonSerializable
 {
     use JsonSerializeByAttribute;
 
+    #[JsonSerialize('nullField1',false)]
+    private $nullField1;
+    #[JsonSerialize('nullField2',true)]
+    private $nullField2 = null;
     #[JsonSerialize('customPrivateField')]
     private $privateField;
 
@@ -65,6 +69,7 @@ class JsonTestOne implements \JsonSerializable
     #[JsonSerialize] public array $unSetArrayField;
     #[JsonSerialize] public array $arrayField;
     #[JsonSerialize] public array $associativeArrayField;
+
 
     public JsonTestOneNested $jsonTestOneNested1;
 

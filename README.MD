@@ -1,6 +1,6 @@
 The class must be `implements \JsonSerializable`
 
-Then you have to `use JsonSerializeByAttribute` after class declaration;
+Then you have to `use JsonSerializeByAttribute` Trait. It contains the serialization method;
 
 for each field or method you want to serialize add the following attribute
 `#[JsonSerialize]
