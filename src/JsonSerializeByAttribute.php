@@ -29,8 +29,10 @@ trait JsonSerializeByAttribute
                     }
                     :
                     [];
-                if ($ret[$jsonKey] || $this->showNull($jsonSerializeAttribute))
+                if (isset($ret[$jsonKey]) || $this->showNull($jsonSerializeAttribute))
                     return $ret;
+                else
+                    return null;
             });
 
 
