@@ -48,7 +48,7 @@ trait JsonSerializeByAttribute
     private function showNull($jsonSerializeAttribute): bool
     {
         $ret = true;
-        if ($jsonSerializeAttribute && count($jsonSerializeAttribute->getArguments()) > 0){
+        if ($jsonSerializeAttribute && isset($jsonSerializeAttribute->getArguments()[1])){
             $ret = $jsonSerializeAttribute->getArguments()[1] !== false;
         }
         return $ret;
